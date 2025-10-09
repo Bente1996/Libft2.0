@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strlcpy.c                                            :+:    :+:       */
+/*   ft_strlcat.c                                            :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/09 11:16:43 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/09 13:18:11 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/09 15:04:15 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/09 18:23:07 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+// FUNCTION: Appends up to (size - dst_len) - 1 bytes from src to end of dst
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	if (size == 0)
-		return(ft_strlen(src));
-	while(src && size > 1)
+	const size_t	dst_len = ft_strlen(dst);
+
+	if (size <= dst_len)
+		return(ft_strlen(src) + size);
+	dst += dst_len;
+	size -= dst_len + 1;
+	while(src && size)
 	{
 		*dst++ = *src++;
 		size--;
 	}
 	*dst = '\0';
-	return(ft_strlen(src));
+	return(dst_len + ft_strlen(src));
 }
 
 int	main()
 {
-	char	src[] = "AAAAAAAAAA";
-	char	dst[] = "BBBBBBBBBBBBB";
-	ft_strlcpy(dst, src, 5);
+	char	src[100] = "67AAAAA89";
+	char	dst[100] = "BBBBBBBBB12"; //len 11
+	ft_strlcat(dst, src, 14); // dest_len + 3 = 2 chars van src
 	printf("%s\n", dst);
 	return(0);
 }

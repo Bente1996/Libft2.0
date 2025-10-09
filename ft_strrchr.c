@@ -1,45 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_memmove.c                                            :+:    :+:       */
+/*   strrchr.c                                               :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/08 17:10:45 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/08 18:26:20 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/09 18:29:19 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/09 18:38:50 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*cdest;
-	const char	*csrc = (char *)src;
-
-	cdest = (char *)dest;
-	if(cdest - csrc < (int)n)
+	size_t	s_len;
+	s_len = ft_strlen(s) + 1;
+	s += s_len;
+	while(s_len)
 	{
-		cdest += n - 1;
-		csrc += n - 1;
-		while(n)
-		{
-			*cdest-- = *csrc--;
-			n--;
-		}
+		if(*s == c)
+			return((char *)s);
+		s_len--;
+		s--;
 	}
-	else
-		ft_memcpy(dest, src, n);
-	return(dest);
+	return(NULL);
 }
 
 int	main()
 {
-	char	dest[] = "BBBBBBBBBBBBBBB";
-	char	src[] = "AAAAAAAAAAAAAAA";
-
-	printf("%s\n", (char *)ft_memmove(dest, src, 6));
+	char	s[] = "op zoek naar de laatste s in de string";
+	char	c = 's';
+	printf("%s\n", ft_strrchr(s, c));
 	return(0);
 }
-

@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_memmove.c                                            :+:    :+:       */
+/*   ft_tolower.c                                            :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/08 17:10:45 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/08 18:26:20 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/09 17:14:32 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/09 17:15:52 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_lower(int c)
 {
-	char	*cdest;
-	const char	*csrc = (char *)src;
-
-	cdest = (char *)dest;
-	if(cdest - csrc < (int)n)
-	{
-		cdest += n - 1;
-		csrc += n - 1;
-		while(n)
-		{
-			*cdest-- = *csrc--;
-			n--;
-		}
-	}
-	else
-		ft_memcpy(dest, src, n);
-	return(dest);
+	if(c >= 'A' && c <= 'Z')
+		c += 32;
+	return(c);
 }
 
 int	main()
 {
-	char	dest[] = "BBBBBBBBBBBBBBB";
-	char	src[] = "AAAAAAAAAAAAAAA";
+	char	c = 'A';
 
-	printf("%s\n", (char *)ft_memmove(dest, src, 6));
+	printf("%c\n", ft_lower(c));
 	return(0);
 }
-

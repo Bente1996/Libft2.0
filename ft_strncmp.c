@@ -1,45 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_memmove.c                                            :+:    :+:       */
+/*   ft_strncmp.c                                            :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/08 17:10:45 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/08 18:26:20 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/09 18:50:37 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/09 19:05:19 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*cdest;
-	const char	*csrc = (char *)src;
-
-	cdest = (char *)dest;
-	if(cdest - csrc < (int)n)
+	while(n)
 	{
-		cdest += n - 1;
-		csrc += n - 1;
-		while(n)
+		if(*s1 == *s2)
 		{
-			*cdest-- = *csrc--;
-			n--;
+			return(*s1 - *s2);
 		}
+		n--;
+		s1++;
+		s2++;
 	}
-	else
-		ft_memcpy(dest, src, n);
-	return(dest);
+	return(0);
 }
 
 int	main()
 {
-	char	dest[] = "BBBBBBBBBBBBBBB";
-	char	src[] = "AAAAAAAAAAAAAAA";
+	char	s1[] = "aaaaa";
+	char	s2[] = "bbbbb";
 
-	printf("%s\n", (char *)ft_memmove(dest, src, 6));
+	printf("%d\n", ft_strncmp(s1, s2, 2));
 	return(0);
 }
-

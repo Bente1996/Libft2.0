@@ -1,45 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_memmove.c                                            :+:    :+:       */
+/*   ft_strchr.c                                             :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/08 17:10:45 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/08 18:26:20 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/09 17:45:45 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/09 18:55:10 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*cdest;
-	const char	*csrc = (char *)src;
-
-	cdest = (char *)dest;
-	if(cdest - csrc < (int)n)
+	while(s)
 	{
-		cdest += n - 1;
-		csrc += n - 1;
-		while(n)
-		{
-			*cdest-- = *csrc--;
-			n--;
-		}
+		if(*s == c) // waarom niet *s++, vergeleken met bv strlcat = vs == ? .IF?
+			return((char *)s);
+		s++;
 	}
-	else
-		ft_memcpy(dest, src, n);
-	return(dest);
+	if(c == '\0')
+		return((char *)s);
+	return(NULL);
 }
 
 int	main()
 {
-	char	dest[] = "BBBBBBBBBBBBBBB";
-	char	src[] = "AAAAAAAAAAAAAAA";
+	char	s[] = "zoek naar de eerste c in de string";
+	char	c = 0; 
 
-	printf("%s\n", (char *)ft_memmove(dest, src, 6));
+	printf("%s\n", ft_strchr(s, c));
 	return(0);
 }
-
