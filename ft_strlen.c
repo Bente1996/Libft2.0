@@ -23,8 +23,8 @@ size_t	ft_strlen(const char *s)
 	return(i);
 }
 
-int	main()
-{
-	printf("%zu\n", ft_strlen("zevenen"));
-	return(0);
-}
+//int	main()
+//{
+//	printf("%zu\n", ft_strlen("zevenen"));
+//	return(0);
+//}
