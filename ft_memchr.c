@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strlcpy.c                                            :+:    :+:       */
+/*   ft_memchr.c                                             :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/09 11:16:43 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/09 13:18:11 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/16 15:49:32 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/16 16:25:41 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (size == 0)
-		return(ft_strlen(src));
-	while(src && size > 1)
-	{
-		*dst++ = *src++;
-		size--;
-	}
-	*dst = '\0';
-	return(ft_strlen(src));
-}
+	const char	*str = (char *)s;
 
-//int	main()
-//{
-//	char	src[] = "AAAAAAAAAA";
-//	char	dst[] = "BBBBBBBBBBBBB";
-//	ft_strlcpy(dst, src, 5);
-//	printf("%s\n", dst);
-//	return(0);
-//}
+	while(n)
+	{
+		if(*str == c)
+			return((void *)str);
+		str++;
+		n--;
+	}
+	return(NULL);
+}
+int	main()
+{
+	char	s[] = "searching for a c in the sentence";
+	char	c = 'c';
+
+	printf("%s\n", (char *)ft_memchr(s, c, 15));
+	return(0);
+}

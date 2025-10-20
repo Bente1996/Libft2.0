@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strncmp.c                                            :+:    :+:       */
+/*   ft_strjoin.c                                            :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/09 18:50:37 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/09 19:05:19 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/20 18:14:53 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/20 18:39:49 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
+#include <stdlib.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	while(n)
-	{
-		if(*s1 != *s2)
-			return(*s1 - *s2);
-		n--;
-		s1++;
-		s2++;
-	}
-	return(0);
+	char	*joined;
+
+	joined = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!joined)
+		return (0);
+	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(&joined[ft_strlen(s1)], s2, ft_strlen(s2) + 1);
+	return (joined);
 }
 
 int	main()
 {
-	char	s1[] = "cc";
-	char	s2[] = "bbbbb";
+	char		s1[] = "AAA";
+	char		s2[] = "BBBBBB";
+	char *const	result = ft_strjoin(s1, s2); // ALLOC
 
-	printf("%d\n", ft_strncmp(s1, s2, 1));
-	return(0);
+	printf("%s\n", result); // DOESNT FREE
+	free(result); // FREE
+	return (0);
 }

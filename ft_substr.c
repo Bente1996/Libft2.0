@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strlcpy.c                                            :+:    :+:       */
+/*   ft_substr.c                                             :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/09 11:16:43 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/09 13:18:11 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/20 17:58:10 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/20 18:14:12 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
+#include <stdlib.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	if (size == 0)
-		return(ft_strlen(src));
-	while(src && size > 1)
-	{
-		*dst++ = *src++;
-		size--;
-	}
-	*dst = '\0';
-	return(ft_strlen(src));
+	char	*sub;
+
+	sub = malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, &s[start], len + 1);
+	return (sub);
 }
 
-//int	main()
-//{
-//	char	src[] = "AAAAAAAAAA";
-//	char	dst[] = "BBBBBBBBBBBBB";
-//	ft_strlcpy(dst, src, 5);
-//	printf("%s\n", dst);
-//	return(0);
-//}
+int	main()
+{
+	char	s[] = "AAABAAAAAAAA";
+
+	printf("%s\n", ft_substr(s, 3, 25));
+	return (0);
+}

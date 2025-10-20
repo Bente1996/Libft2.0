@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strlcpy.c                                            :+:    :+:       */
+/*   ft_strdup.c                                             :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/09 11:16:43 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/09 13:18:11 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/20 17:23:07 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/20 17:57:21 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
+#include <stdlib.h>
+#include <string.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strdup(const char *s)
 {
-	if (size == 0)
-		return(ft_strlen(src));
-	while(src && size > 1)
-	{
-		*dst++ = *src++;
-		size--;
-	}
-	*dst = '\0';
-	return(ft_strlen(src));
+	char	*dup;
+
+	dup = malloc(ft_strlen(s) + 1);
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s, ft_strlen(s) + 1);
+	return (dup);
 }
 
-//int	main()
-//{
-//	char	src[] = "AAAAAAAAAA";
-//	char	dst[] = "BBBBBBBBBBBBB";
-//	ft_strlcpy(dst, src, 5);
-//	printf("%s\n", dst);
-//	return(0);
-//}
+int	main()
+{
+	char	s[] = "";
+	printf("%s\n", ft_strdup(s));
+	printf("%s\n", strdup(s));
+	return (0);
+}
