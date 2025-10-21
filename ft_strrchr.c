@@ -28,10 +28,10 @@ char	*ft_strrchr(const char *s, int c)
 	return(NULL);
 }
 
-int	main()
-{
-	char	s[] = "op zoek naar de laatste s in de string";
-	char	c = 's';
-	printf("%s\n", ft_strrchr(s, c));
-	return(0);
-}
+//int	main()
+//{
+//	char	s[] = "op zoek naar de laatste s in de string";
+//	char	c = 's';
+//	printf("%s\n", ft_strrchr(s, c));
+//	return(0);
+//}

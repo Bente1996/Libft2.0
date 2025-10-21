@@ -17,7 +17,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	while(s)
 	{
-		if(*s == c) // waarom niet *s++, vergeleken met bv strlcat = vs == ? .IF?
+		if(*s == c)
 			return((char *)s);
 		s++;
 	}
@@ -26,11 +26,11 @@ char	*ft_strchr(const char *s, int c)
 	return(NULL);
 }
 
-int	main()
-{
-	char	s[] = "zoek naar de eerste c in de string";
-	char	c = 0; 
-
-	printf("%s\n", ft_strchr(s, c));
-	return(0);
-}
+//int	main()
+//{
+//	char	s[] = "zoek naar de eerste c in de string";
+//	char	c = 0; 
+//
+//	printf("%s\n", ft_strchr(s, c));
+//	return(0);
+//}
