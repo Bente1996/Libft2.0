@@ -1,3 +1,4 @@
+#CC := cc
 NAME := libft.a
 HEADERFILE := libft.h
 SRCFILES := ft_isalpha.c \
@@ -25,16 +26,19 @@ CFLAGS ?= -Wall -Wextra -Werror -c
 all : $(NAME)
 
 $(NAME) : $(OBJFILES)
-	ar -rcs $(NAME) $(OBLFILES)
+	$(AR) -rcs $(NAME) $(OBLFILES)
 
 %.o: %.c
-	cc $(CFLAGS) $^
+	$(CC) $(CFLAGS) $^
 
 clean:
-	rm -f $(OBJFILES)
+	$(RM) $(OBJFILES)
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+test:
+	echo "$(CC) $(RM) $(AR) $(ARFLAGS)"
 
 .PHONY: all clean fclean re
