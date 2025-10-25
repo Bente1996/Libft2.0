@@ -29,14 +29,14 @@ char	*ft_itoa(int n)
 		l_n *= -1;
 		len = 2;
 	}
-	while (l_n > 9)
+	while (l_n > 9) // test met 0
 	{
 		l_n /= 10;
 		len++;
 	}
 	printf("%d\n",len);
 	printf("%d\n", n);
-	str = malloc(sizeof(char) * len);
+	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	if (n_l < 0)
@@ -44,11 +44,10 @@ char	*ft_itoa(int n)
 		n_l *= -1;
 		*str = '-';
 	}
-	while (n_l > 9)
+	while (n_l > 9) // moet 0 zijn
 	{
 		str++;
-		n_l -= n_l * (0,1 * lenn); // niet goed, ff wiskunde doen
-		*str = n_l + 48;
+		*str = (n_l % 10) + 48;
 		n_l /= 10;
 	}
 	return (str);
