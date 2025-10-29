@@ -16,32 +16,18 @@
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	const char	*end;
+	char	*begin;
 
-	printf("%s\n", set);
-	while (*s1)
-	{
-		set = &set[0];
-		while (*set && ft_strchr(set, *s1))
-			set++;
-		if (!ft_strchr(set, *s1))
-			break ;
+	while (*s1 && ft_strchr(set, *s1))
 		s1++;
-	}
-	printf("%s\n", s1);
-	printf("%c\n", *s1);
-	end = &s1[ft_strlen(s1)];
-	printf("2\n");
-	while (end > s1)
-	{
-		set = &set[0];
-		while (*set && ft_strchr(set, *end))
-			set++;
-		if (!ft_strchr(set, *end))
-			break ;
-		end--;
-	}
-	return (ft_substr(s1, 0, end - s1));
+	begin = (char *)s1;
+	s1 += ft_strlen(s1) - 1;
+	while (ft_strchr(set, *s1))
+		s1--;
+	begin = ft_substr(begin, 0, s1 + 1 - begin);
+	if (!begin)
+		return (NULL);
+	return (begin);
 }
 
 int	main()

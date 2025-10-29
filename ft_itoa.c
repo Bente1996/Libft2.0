@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                            ::::::::        */
 /*   ft_itoa.c                                               :+:    :+:       */
 /*                                                          +:+               */
@@ -17,6 +16,7 @@
 char	*ft_itoa(int n)
 {
 	char	*str;
+	char	*str_start;
 	long	l_n;
 	int	len;
 	long	n_l;
@@ -29,33 +29,36 @@ char	*ft_itoa(int n)
 		l_n *= -1;
 		len = 2;
 	}
-	while (l_n > 9) // test met 0
+	while (l_n > 9)
 	{
 		l_n /= 10;
 		len++;
 	}
-	printf("%d\n",len);
-	printf("%d\n", n);
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
+	str_start = str;
 	if (n_l < 0)
 	{
 		n_l *= -1;
 		*str = '-';
 	}
-	while (n_l > 9) // moet 0 zijn
+	str += len - 1;
+	while (n_l > 9)
 	{
-		str++;
 		*str = (n_l % 10) + 48;
 		n_l /= 10;
+		str--;
 	}
-	return (str);
+	*str = (n_l % 10) + 48;
+	return (str_start);
 }
 
 int	main()
 {
-	int	n = 1234567;
+	int	n = -2147483649;
 	printf("%s\n", ft_itoa(n));
+	int a = 0 % 10;
+	printf("%d\n", a);
 	return (0);
 }

@@ -16,31 +16,20 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	printf("%ld\n", ft_strlen(little));
-	const char	*start_little = little;
-		printf("3\n");
+	size_t	little_len;
 
-	if (ft_strlen((char *)little) > ft_strlen((char *)big) || ft_strlen((char *)little) > len) // niet
-																	   // nodigdenk
-																	   // ik
-		return (NULL);
-	if (!(char *)little)
+	if (!little || !little[0])
 		return ((char *)big);
-	printf("2\n");
-	while (len > 0 && ft_strncmp(big, little, len)) // len check nodig met
-													// size_t?
+	little_len = ft_strlen(little);
+	if (len < little_len)
+		return (NULL);
+	while (len >= little_len && ft_strncmp(big, little, little_len))
 	{
 		big++;
 		len--;
 	}
-	while (len > 0 && !ft_strncmp(big, little, len))
-	{
-		big++;
-		little++;
-		len--;
-		if (*little == '\0')
-			return ((char *)start_little);
-	}
+	if (len >= little_len && !ft_strncmp(big, little, little_len))
+		return ((char *)big);
 	return (NULL);
 }
 
@@ -49,7 +38,7 @@ int	main()
 	char	big[] = "AAAAAAABBBBAAAAAAA";
 	char	little[] = "BBBB";
 
-	printf("%s\n", ft_strnstr(big, little, 1));
-	//printf("%s\n", strnstr(big, little, 4));
+	printf("%s\n", ft_strnstr(big, little, 16));
+	printf("%s\n", ft_strnstr(big, little, 4));
 	return (0);
 }

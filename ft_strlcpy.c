@@ -15,20 +15,21 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
+	const size_t strlen = ft_strlen(src);
 	if (size == 0)
-		return(ft_strlen(src));
-	while(src && size > 1)
+		return(strlen);
+	while(*src && size > 1)
 	{
 		*dst++ = *src++;
 		size--;
 	}
 	*dst = '\0';
-	return(ft_strlen(src));
+	return(strlen);
 }
 
 //int	main()
 //{
-//	char	src[] = "AAAAAAAAAA";
+//	char	src[] = "AA";
 //	char	dst[] = "BBBBBBBBBBBBB";
 //	ft_strlcpy(dst, src, 5);
 //	printf("%s\n", dst);
