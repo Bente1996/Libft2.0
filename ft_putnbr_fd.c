@@ -1,50 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strmapi.c                                            :+:    :+:       */
+/*   ft_putnbr_fd.c                                          :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/21 14:39:08 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/21 15:17:02 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/10/31 17:02:17 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/10/31 17:12:03 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
+#include <unistd.h>
 
-char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
+void	ft_putnbr_fd(int n, int fd)
 {
-	char *s_f;
-	unsigned int i; // niet nodig zou je zeggen
+	char	*s;
+	long	n_long;
+	int	len;
+	int	i;
 
+	n_long = n;
+	s = NULL;
 	i = 0;
-	s_f = malloc(ft_strlen(s + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	while (*s)
+	if (n_long < 0)
 	{
-		s_f[i] = f(i, s[i]);
-		i++;
+		ft_putchar_fd('-', fd);
+		n_long *= -1;
 	}
-	s_f[i] = '\0';
-	return (s_f);
+	if (n_long > 0)
+		ft_putnbr_fd(n_long / 10, fd);
+	n_long = (n_long % 10) + 48;
+	s[i] = n_long;
+	i++;
+	if (n_long == '0')
+	{
+		len = ft_strlen(s);
+		while (len > 0)
+		{
+			write(fd, &s[i--], 1);
+			len--;
+		}
+	}
 }
 
-char f(unsigned int i, char c)
+int	main()
 {
-	i = 0;
-	c += 1;
-	return (c);
-}
-
-int main()
-{
-	char s[] = "abcdefg";
-	int i = 0;
-	char c = 'a';
-
-	printf("%s\n", ft_strmapi(s, (*f)(unsigned int, char)));
+	int n = 12345;
+	int fd = 1;
+	ft_putnbr_fd(n, fd);
 	return (0);
 }
