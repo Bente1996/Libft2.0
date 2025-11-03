@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strmapi.c                                            :+:    :+:       */
+/*   ft_lstadd_front.c                                       :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/21 14:39:08 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/21 15:17:02 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/11/03 13:56:58 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/11/03 14:06:19 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,32 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char *s_f;
-	unsigned int i; // niet nodig zou je zeggen
-
-	i = 0;
-	s_f = malloc(ft_strlen(s + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		s_f[i] = f(i, s[i]);
-		i++;
-	}
-	s_f[i] = '\0';
-	return (s_f);
+	new->next = *lst;
+	*lst = new;
 }
 
-char	f(unsigned int i, char c)
+int	main()
 {
-	int garnaal;
-
-	c += 1;
-	garnaal = i;
-	return (c);
-}
-
-int main()
-{
-	char s[] = "abcdefg";
-
-	printf("%s\n", ft_strmapi(s, f));
+	t_list **lst;
+	t_list *first;
+	t_list *new;
+	
+	lst = malloc(sizeof(t_list));
+	if (!lst)
+		return (0);
+	first = malloc(sizeof(t_list));
+	if (!first)
+		return (0);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	*lst = first;
+	printf("%p\n", *lst);
+	printf("%p\n", first);
+	printf("%p\n", new);
+	ft_lstadd_front(lst, new);
+	printf("%p\n", *lst);
 	return (0);
 }

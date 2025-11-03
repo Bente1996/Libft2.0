@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strmapi.c                                            :+:    :+:       */
+/*   ft_lstdelone.c                                          :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/21 14:39:08 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/21 15:17:02 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/11/03 17:55:47 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/11/03 18:00:37 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,6 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	char *s_f;
-	unsigned int i; // niet nodig zou je zeggen
 
-	i = 0;
-	s_f = malloc(ft_strlen(s + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		s_f[i] = f(i, s[i]);
-		i++;
-	}
-	s_f[i] = '\0';
-	return (s_f);
-}
-
-char	f(unsigned int i, char c)
-{
-	int garnaal;
-
-	c += 1;
-	garnaal = i;
-	return (c);
-}
-
-int main()
-{
-	char s[] = "abcdefg";
-
-	printf("%s\n", ft_strmapi(s, f));
-	return (0);
-}

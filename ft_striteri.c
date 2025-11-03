@@ -1,50 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strmapi.c                                            :+:    :+:       */
+/*   ft_striteri.c                                           :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/21 14:39:08 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/21 15:17:02 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/11/03 12:41:18 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/11/03 12:53:52 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
-char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	char *s_f;
-	unsigned int i; // niet nodig zou je zeggen
+	unsigned int	i;
 
 	i = 0;
-	s_f = malloc(ft_strlen(s + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
 	while (s[i] != '\0')
 	{
-		s_f[i] = f(i, s[i]);
+		f(i, &s[i]);
 		i++;
 	}
-	s_f[i] = '\0';
-	return (s_f);
 }
 
-char	f(unsigned int i, char c)
+void	f(unsigned int i, char *c)
 {
 	int garnaal;
 
-	c += 1;
+	*c += 1;
 	garnaal = i;
-	return (c);
 }
 
-int main()
+int	main()
 {
-	char s[] = "abcdefg";
-
-	printf("%s\n", ft_strmapi(s, f));
+	char	s[] = "abcdefg";
+	
+	ft_striteri(s, f);
+	printf("%s\n", s);
 	return (0);
 }

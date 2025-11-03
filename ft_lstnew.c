@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                            ::::::::        */
-/*   ft_strmapi.c                                            :+:    :+:       */
+/*   ft_lstnew.c                                             :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/21 14:39:08 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/21 15:17:02 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/11/03 13:41:28 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/11/03 13:56:14 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,22 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
+t_list	*ft_lstnew(void *content)
 {
-	char *s_f;
-	unsigned int i; // niet nodig zou je zeggen
+	t_list	*new_node;
 
-	i = 0;
-	s_f = malloc(ft_strlen(s + 1) * sizeof(char));
-	if (!s)
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
 		return (NULL);
-	while (s[i] != '\0')
-	{
-		s_f[i] = f(i, s[i]);
-		i++;
-	}
-	s_f[i] = '\0';
-	return (s_f);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-char	f(unsigned int i, char c)
+int	main()
 {
-	int garnaal;
-
-	c += 1;
-	garnaal = i;
-	return (c);
-}
-
-int main()
-{
-	char s[] = "abcdefg";
-
-	printf("%s\n", ft_strmapi(s, f));
+	t_list	*node;
+	node = ft_lstnew("this is the content");
+	printf("%s\n", (char *)node->content);
 	return (0);
 }

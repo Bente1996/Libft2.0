@@ -13,6 +13,12 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -43,5 +49,6 @@ char	**ft_split(const char *s, char c); //
 char	*ft_itoa(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+t_list	*ft_lstlast(t_list *lst);
 
 #endif
