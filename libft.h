@@ -50,5 +50,6 @@ char	*ft_itoa(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 t_list	*ft_lstlast(t_list *lst);
+void	ft_lstclear(t_list **list, void (*del)(void *));
 
 #endif

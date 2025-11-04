@@ -16,4 +16,22 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
+	del(lst->content);
+	free(lst);
+}
 
+void	del(void *node_content)
+{
+}
+
+int	main()
+{
+	t_list *node = malloc(sizeof(t_list));
+	if (!node)
+		return (0);
+	node->content = "this its the content";
+	printf("%s\n", (char *)node->content);
+	ft_lstdelone(node, del);
+	printf("%s\n", (char *)node->content);
+	return (0);
+}
