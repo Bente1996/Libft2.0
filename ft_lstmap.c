@@ -19,7 +19,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_lst;
 	t_list *new_node;
 
-	new_lst = malloc(sizeof(t_list));
+	new_lst = ft_lstnew(f(lst->content));
+	if (!new_lst)
+	{
+		ft_lstclear(&new_lst, del);
+		return (NULL);
+	}
+	lst = lst->next;
 	while (lst)
 	{
 		new_node = ft_lstnew(f(lst->content));
@@ -36,15 +42,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 void	*f(char *node_content)
 {
-	size_t	i;
+	char	*f_content;
 
-	i = 0;
-	while (node_content != (void *)'\0')
-	{
-		node_content[i] += 4;
-		i++;
-	}
-	return (node_content);
+	f_content = node_content;
+	while (*node_content)
+		*node_content++ += 4;
+	return (f_content);
 }
 
 void	del(char *node_content)
@@ -80,7 +83,12 @@ int	main()
 	char	s_four[] = "defg";
 	four->content = s_four;
 	four->next = NULL;
-	ft_lstmap(one, (void *(*)(void *))f, (void (*)(void *))del);
+	printf("%s\n", (char *)one->content);
+	printf("%s\n", (char *)two->content);
+	printf("%s\n", (char *)three->content);
+	printf("%s\n", (char *)four->content);
+	one = ft_lstmap(one, (void *(*)(void *))f, (void (*)(void *))del);
+	printf("new list:\n");
 	printf("%s\n", (char *)one->content);
 	printf("%s\n", (char *)two->content);
 	printf("%s\n", (char *)three->content);
