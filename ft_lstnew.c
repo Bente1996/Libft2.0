@@ -26,10 +26,10 @@ t_list	*ft_lstnew(void *content)
 	return (new_node);
 }
 
-int	main()
-{
-	t_list	*node;
-	node = ft_lstnew("this is the content");
-	printf("%s\n", (char *)node->content);
-	return (0);
-}
+//int	main()
+//{
+//	t_list	*node;
+//	node = ft_lstnew("this is the content");
+//	printf("%s\n", (char *)node->content);
+//	return (0);
+//}

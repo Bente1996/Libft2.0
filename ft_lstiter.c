@@ -16,45 +16,49 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	while (lst->next)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	if (!lst)
+		return;
 	f(lst->content);
+	ft_lstiter(lst->next, f);
 }
 
-void	f(void *node) // is dit mogelijk met void *?
-{
-}
+//void	f(char *node_content)
+//{
+//	while (*node_content)
+//		*node_content++ += 4;
+//}
 
-int	main()
-{
-	t_list	*one = malloc(sizeof(t_list));
-	if (!one)
-		return (0);
-	t_list	*two = malloc(sizeof(t_list));
-	if (!two)
-		return (0);
-	t_list	*three =  malloc(sizeof(t_list));
-	if (!three)
-		return (0);
-	t_list	*four = malloc(sizeof(t_list));
-	if (!four)
-		return (0);
-
-	one->content = "abcd";
-	one->next = two;
-	two->content = "bcde";
-	two->next = three;
-	three->content = "cdef";
-	three->next = four;
-	four->content = "defg";
-	four->next = NULL;
-	ft_lstiter(one, f);
-	printf("%s\n", (char *)one->content);
-	printf("%s\n", (char *)two->content);
-	printf("%s\n", (char *)three->content);
-	printf("%s\n", (char *)four->content);
-	return (0);
-}
+//int	main()
+//{
+//	t_list	*one = malloc(sizeof(t_list));
+//	if (!one)
+//		return (0);
+//	t_list	*two = malloc(sizeof(t_list));
+//	if (!two)
+//		return (0);
+//	t_list	*three =  malloc(sizeof(t_list));
+//	if (!three)
+//		return (0);
+//	t_list	*four = malloc(sizeof(t_list));
+//	if (!four)
+//		return (0);
+//
+//	char	s_one[] = "abcd";
+//	one->content = s_one;
+//	one->next = two;
+//	char	s_two[] = "bcde";
+//	two->content = s_two;
+//	two->next = three;
+//	char	s_three[] = "cdef";
+//	three->content = s_three;
+//	three->next = four;
+//	char	s_four[] = "defg";
+//	four->content = s_four;
+//	four->next = NULL;
+//	ft_lstiter(one, (void (*)(void *))f);
+//	printf("%s\n", (char *)one->content);
+//	printf("%s\n", (char *)two->content);
+//	printf("%s\n", (char *)three->content);
+//	printf("%s\n", (char *)four->content);
+//	return (0);
+//}

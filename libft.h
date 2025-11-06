@@ -49,7 +49,10 @@ char	**ft_split(const char *s, char c); //
 char	*ft_itoa(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **list, void (*del)(void *));
 
 #endif
