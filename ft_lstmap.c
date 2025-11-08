@@ -14,18 +14,33 @@
 #include "libft.h"
 #include <stdlib.h>
 
+static
+t_list	*safe_lstnew(void *content, void (*del)(void *))
+{
+	t_list	*new;
+
+	new = ft_lstnew(content);
+	if (!new)
+	{
+		del(content);
+		return (NULL);
+	}
+	return (new);
+}
+
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
 	t_list *new_node;
 
-	new_lst = ft_lstnew(f(lst->content));
+	new_lst = ft_lstnew(f(lst->content)); // lst == NULL?
+										  // f succeed, lstnew fail?
 	if (!new_lst)
 	{
 		ft_lstclear(&new_lst, del);
 		return (NULL);
 	}
-	lst = lst->next;
+	lst = lst->next; // lst == NULL
 	while (lst)
 	{
 		new_node = ft_lstnew(f(lst->content));
@@ -48,6 +63,11 @@ void	*f(char *node_content)
 	while (*node_content)
 		*node_content++ += 4;
 	return (f_content);
+}
+
+void	del_noop(void *content)
+{
+	(void)content;
 }
 
 void	del(char *node_content)
