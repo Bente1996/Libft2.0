@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "libft.h"
 #include <stdlib.h>
 
-size_t	str_count(const char *s, char c)
+int	str_count(const char *s, char c)
 {
-	size_t	count;
+	int		count;
 	size_t	i;
 
 	count = 0;
@@ -27,7 +28,7 @@ size_t	str_count(const char *s, char c)
 			i++;
 		if (s[i] != c && s[i] != '\0')
 		{
-			count += 1;
+			count++;
 			while (s[i] != c && s[i] != '\0')
 				i++;
 		}
@@ -35,7 +36,21 @@ size_t	str_count(const char *s, char c)
 	return (count);
 }
 
-size_t	str_len(char *s, char c)
+size_t	split_free(char **split)
+{
+	int	j;
+
+	j = 0;
+	while (*split[j] != '\0')
+	{
+		free(split[j]);
+		j++;
+	}
+	free(split);
+	return (0);
+}
+
+size_t	str_split(char **split, char *s, char c, int j)
 {
 	size_t	len;
 	size_t	i;
@@ -57,113 +72,52 @@ size_t	str_len(char *s, char c)
 	while (s[i] == c && s[i] != '\0')
 		i++;
 	s += delim;
-	printf("%s\n", s);
-	return (len);
+	split[j] = ft_substr(s, 0, len);
+	if (!split[j])
+		return (split_free(split));
+	return (i);
 }
-
 
 char	**ft_split(const char *s, char c)
 {
 	char	**split;
-	size_t	strings;
-	char	**split_begin;
-	size_t	len;
+	int		strings;
+	size_t	i;
+	int		j;
 
+	j = 0;
 	strings = str_count(s, c);
 	split = malloc(sizeof(char *) * strings + 1);
 	if (!split)
 		return (NULL);
-	split_begin = split;
-	len = str_len((char *)s, c);
-	*split = ft_substr(s, s[0], len);
-	//while (strings > 1)
-	//{
-	//	len = str_len((char *)s, c);
-	//	*split = ft_substr(s, s[0], len);
-	//	split++;
-	//	strings--;
-	//}
-	*split = NULL;
-	split -= strings + 1;
-	return (split_begin);
+	while (strings > 0)
+	{
+		i = str_split(split, (char *)s, c, j);
+		if (!i)
+			return (NULL);
+		s += i;
+		j++;
+		strings--;
+	}
+	split[j] = NULL;
+	return (split);
 }
 
-int	main()
+int	main(void)
 {
-	char	s[] = "  sdas  deze gaan we splitten   hshaj";
-	char	c = ' ';
-	char	**split;
+	const char	s[] = "Hello, World! Hello, Universe! gom";
+	const char	c = ' ';
+	char		**store;
+	char		**split;
 
 	split = ft_split(s, c);
+	store = split;
 	while (*split)
 	{
 		printf("%s\n", *split);
+		free(*split);
 		split++;
 	}
+	free(store);
 	return (0);
 }
-
-//char	**ft_split(char const *s, char c)
-//{
-//	char	**split;
-//	size_t	i;
-//	size_t	del_count;
-//	size_t	j;
-//	size_t	str;
-//	size_t	**s_len;
-//	size_t	**len_s;
-//
-//	i = 0;
-//	j = 0;
-//	str = 0;
-//	del_count = 0;
-//	while (s[i] != '\0')
-//	{
-//		if (s[i] == c)
-//			del_count += 1;
-//		i++;
-//	}
-//	split = malloc(sizeof(char *) * (del_count + 1) + 1);
-//	if (!split)
-//		return (NULL);
-//	s_len = malloc(sizeof(int *) * (del_count + 1) + 1);
-//	if (!s_len)
-//		return (NULL);
-//	len_s = s_len;
-//	i = 0;
-//	while (s[i] != '\0' && s[i] != c) // allocceer alle strings
-//	{
-//		i++;
-//		if (s[i] == '\0' || s[i] == c)
-//		{
-//			*s_len = i;
-//			s_len++;
-//			split[str] = malloc(sizeof(char) * i + 1);
-//			if (!split[str])
-//			{
-//				//ft_free(split); // free all strings
-//				free(split);
-//				return (NULL);
-//			}
-//			str++;
-//			if (s[i] == '\0')
-//			{
-//				split[str] = malloc(sizeof(NULL));
-//				break ;
-//			}
-//		}
-//	}
-//	while (str > 1)
-//	{
-//		while (*len_s)
-//		{
-//			split[str][j++] = s[i++];
-//			*len_s--;
-//		}
-//		split[str][j] = '\0';
-//		str--;
-//		i++;
-//		len_s++;
-//	}
-//	return (split);
-//}
