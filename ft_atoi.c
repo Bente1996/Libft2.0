@@ -29,8 +29,6 @@ int	ft_atoi(const char *nptr)
 		if (*nptr == '-')
 			sign *= -1;
 		nptr++;
-		if (*nptr == '-' || *nptr == '+')
-			return (0);
 	}
 	while (*nptr >= '0' && *nptr <= '9')
 		converted = (*nptr++ - 48) + (10 * converted);
@@ -39,7 +37,7 @@ int	ft_atoi(const char *nptr)
 
 int	main()
 {
-	char	str[] = "  \f -73473289";
+	char	str[] = "  \f ---73473289";
 
 	printf("%d\n", ft_atoi(str));
 	printf("%d\n", atoi(str));

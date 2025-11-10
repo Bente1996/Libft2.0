@@ -13,31 +13,28 @@
 #include <stdio.h>
 #include "libft.h"
 #include <stdlib.h>
-#include <limits.h>
+#include <stdint.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	memory;
 	void	*ptr;
 
-	ptr = 0;
-	memory = nmemb * size;
-	if (memory == 0)
-		return (ptr);
-	printf("%ld\n", memory);
-	printf("%d\n", INT_MAX);
-	if (memory > INT_MAX)
-		return ((void *)"int overflow error\n");
-	ptr = malloc(memory);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, memory);
+	ptr = NULL;
+	if(SIZE_MAX / size > nmemb)
+	{
+		ptr = malloc(nmemb * size);
+		if (!ptr)
+			return (NULL);
+		ft_bzero(ptr, nmemb * size);
+	}
 	return (ptr);
 }
 
 int	main()
 {
-	printf("%p\n", ft_calloc(214, 21474836));
-	printf("%p\n", calloc(214, 21474836));
+	printf("%p\n", ft_calloc(3, 12345));
+	printf("%p\n", calloc(3, 12345));
+	printf("%p\n", ft_calloc(3, SIZE_MAX));
+	printf("%p\n", calloc(3, SIZE_MAX));
 	return (0);
 }

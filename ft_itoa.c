@@ -13,52 +13,63 @@
 #include "libft.h"
 #include <stdlib.h>
 
+static
+size_t	n_len(long	n)
+{
+	size_t	len;
+
+	len = 1;
+	if (n < 0)
+	{
+		n *= -1;
+		len = 2;
+	}
+	while (n > 9)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+static
+void	make_str(long n, char *str, size_t len)
+{
+	if (n < 0)
+	{
+		n *= -1;
+		*str = '-';
+	}
+	str += len - 1;
+	while (n > 9)
+	{
+		*str = (n % 10) + 48;
+		n /= 10;
+		str--;
+	}
+	*str = (n % 10) + 48;
+}
+
 char	*ft_itoa(int n)
 {
 	char	*str;
 	char	*str_start;
-	long	l_n;
-	int	len;
-	long	n_l;
+	size_t	len;
 
-	l_n = n;
-	n_l = n;
-	len = 1;
-	if (l_n < 0)
-	{
-		l_n *= -1;
-		len = 2;
-	}
-	while (l_n > 9)
-	{
-		l_n /= 10;
-		len++;
-	}
+	len = n_len(n);
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	str_start = str;
-	if (n_l < 0)
-	{
-		n_l *= -1;
-		*str = '-';
-	}
-	str += len - 1;
-	while (n_l > 9)
-	{
-		*str = (n_l % 10) + 48;
-		n_l /= 10;
-		str--;
-	}
-	*str = (n_l % 10) + 48;
+	make_str(n, str, len);
 	return (str_start);
 }
 
 int	main()
 {
-	int	n = -2147483649;
+	int	n = -2147483648;
 	printf("%s\n", ft_itoa(n));
-	int a = 0 % 10;
-	printf("%d\n", a);
+	int	intje = 15275;
+	printf("%s\n", ft_itoa(intje));
 	return (0);
 }
