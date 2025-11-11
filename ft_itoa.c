@@ -21,7 +21,7 @@ size_t	n_len(long	n)
 	len = 1;
 	if (n < 0)
 	{
-		n *= -1;
+		n = -n;
 		len = 2;
 	}
 	while (n > 9)
@@ -37,7 +37,7 @@ void	make_str(long n, char *str, size_t len)
 {
 	if (n < 0)
 	{
-		n *= -1;
+		n = -n;
 		*str = '-';
 	}
 	str += len - 1;
@@ -53,23 +53,19 @@ void	make_str(long n, char *str, size_t len)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	char	*str_start;
 	size_t	len;
 
 	len = n_len(n);
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
-	str_start = str;
 	make_str(n, str, len);
-	return (str_start);
+	return (str);
 }
 
 int	main()
 {
-	int	n = -2147483648;
-	printf("%s\n", ft_itoa(n));
-	int	intje = 15275;
-	printf("%s\n", ft_itoa(intje));
+	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(0));
 	return (0);
 }

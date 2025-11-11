@@ -15,6 +15,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
+static
 int	str_count(const char *s, char c)
 {
 	int		count;
@@ -36,6 +37,7 @@ int	str_count(const char *s, char c)
 	return (count);
 }
 
+static
 size_t	split_free(char **split)
 {
 	int	j;
@@ -50,6 +52,7 @@ size_t	split_free(char **split)
 	return (0);
 }
 
+static
 size_t	str_split(char **split, char *s, char c, int j)
 {
 	size_t	len;

@@ -18,14 +18,14 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*old_lst;
 
-	while (lst)
+	while (*lst)
 	{
 		del((*lst)->content);
 		old_lst = *lst;
 		*lst = (*lst)->next;
 		free(old_lst);
 	}
-	lst = NULL;
+	*lst = NULL;
 }
 
 void	ft_lstclear_recursive(t_list **lst, void (*del)(void *))

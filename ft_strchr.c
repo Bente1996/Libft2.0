@@ -15,22 +15,14 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while(*s)
-	{
-		if(*s == c)
-			return((char *)s);
-		s++;
-	}
-	if(c == '\0')
-		return((char *)s);
-	return(NULL);
+	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }
 
-//int	main()
-//{
-//	char	s[] = "zoek naar de eerste c in de string";
-//	char	c = 0; 
-//
-//	printf("%s\n", ft_strchr(s, c));
-//	return(0);
-//}
+int	main()
+{
+	char	s[] = "zoek naar de eerste c in de string";
+	char	c = 'c'; 
+
+	printf("%s\n", ft_strchr(s, c));
+	return(0);
+}

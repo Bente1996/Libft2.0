@@ -16,8 +16,13 @@
 #include <limits.h>
 
 static
-void	fill_buffer(char buf[11], size_t len, long n)
+void	fill_buffer(char buf[11], size_t len, long n, int fd)
 {
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
 	while (len)
 	{
 		buf[len--] = (n % 10) + '0';
@@ -25,30 +30,30 @@ void	fill_buffer(char buf[11], size_t len, long n)
 	}
 }
 
-void	ft_putnbr_fd(int n, int fd)
+static
+size_t	n_len(long n)
 {
-	long	n_long;
-	long	long_n;
 	size_t	len;
-	size_t	leng;
-	char	buf[11];
 
-	n_long = n;
 	len = 1;
-	if (n_long < 0)
+	if (n < 0)
+		n = -n;
+	while (n > 9)
 	{
-		ft_putchar_fd('-', fd);
-		n_long *= -1;
-	}
-	long_n = n_long;
-	while (n_long > 9)
-	{
-		n_long /= 10;
+		n /= 10;
 		len++;
 	}
-	leng = len;
-	fill_buffer(buf, len, long_n);
-	write(fd, buf + 1, leng);
+	return (len);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	size_t	len;
+	char	buf[11];
+
+	len = n_len(n);
+	fill_buffer(buf, len, n, fd);
+	write(fd, buf + 1, len);
 }
 
 int	main()

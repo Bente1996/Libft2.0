@@ -16,13 +16,15 @@
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
+	const	size_t	s1_len = ft_strlen(s1);
+	const	size_t	s2_len = ft_strlen(s2);
 	char	*joined;
 
-	joined = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	joined = malloc(s1_len + s2_len + 1);
 	if (!joined)
 		return (0);
-	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);
-	ft_strlcpy(&joined[ft_strlen(s1)], s2, ft_strlen(s2) + 1);
+	ft_strlcpy(joined, s1, s1_len + 1);
+	ft_strlcpy(&joined[s1_len], s2, s2_len + 1);
 	return (joined);
 }
 

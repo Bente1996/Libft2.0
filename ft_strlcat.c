@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include "libft.h"
 
-// FUNCTION: Appends up to (size - dst_len) - 1 bytes from src to end of dst
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	const size_t	dst_len = ft_strlen(dst);
@@ -21,13 +20,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (size <= dst_len)
 		return(ft_strlen(src) + size);
 	dst += dst_len;
-	size -= dst_len + 1;
-	while(src && size)
-	{
-		*dst++ = *src++;
-		size--;
-	}
-	*dst = '\0';
+	size -= dst_len;
+	ft_strlcpy(dst, src, size);
 	return(dst_len + ft_strlen(src));
 }
 

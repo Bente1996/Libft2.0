@@ -26,11 +26,12 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return(NULL);
 }
-int	main()
-{
-	char	s[] = "searching for a c in the sentence";
-	char	c = 'c';
 
-	printf("%s\n", (char *)ft_memchr(s, c, 15));
-	return(0);
-}
+//int	main()
+//{
+//	char	s[] = "searching for a c in the sentence";
+//	char	c = 'c';
+//
+//	printf("%s\n", (char *)ft_memchr(s, c, 15));
+//	return(0);
+//}

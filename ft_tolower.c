@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-int	ft_lower(int c)
+int	ft_tolower(int c)
 {
 	if(c >= 'A' && c <= 'Z')
 		c += 32;
@@ -24,6 +24,6 @@ int	main()
 {
 	char	c = 'A';
 
-	printf("%c\n", ft_lower(c));
+	printf("%c\n", ft_tolower(c));
 	return(0);
 }
