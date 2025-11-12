@@ -12,10 +12,11 @@
 
 #include <stdio.h>
 #include "libft.h"
+#include <string.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while(n)
+	while(n && *s1 && *s2)
 	{
 		if(*s1 != *s2)
 			return(*s1 - *s2);
@@ -23,14 +24,17 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		s1++;
 		s2++;
 	}
+	if (n)
+		return (*s1 - *s2);
 	return(0);
 }
 
-//int	main()
-//{
-//	char	s1[] = "cc";
-//	char	s2[] = "bbbbb";
-//
-//	printf("%d\n", ft_strncmp(s1, s2, 1));
-//	return(0);
-//}
+int	main()
+{
+	char	s1[] = "cccccccccccb\0b";
+	char	s2[] = "cc\0c";
+
+	printf("%d\n", ft_strncmp(s1, s2, 3));
+	printf("%d\n", strncmp(s1, s2, 3));
+	return(0);
+}
