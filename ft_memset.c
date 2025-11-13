@@ -10,26 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
+#include <stddef.h>
 
 void	*ft_memset(void *s, int c, size_t n)
 {
 	char	*byte;
 
 	byte = (char *)s;
-	while(n)
+	while (n)
 	{
 		*byte++ = c;
 		n--;
 	}
-	return(s);
+	return (s);
 }
-
-/*int	main()*/
-/*{*/
-/*	char	str[] = "dit is een string";*/
-/**/
-/*	printf("%s\n", (char *)ft_memset(str, 'B', 8));*/
-/*	return(0);*/
-/*}*/

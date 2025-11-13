@@ -1,20 +1,19 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                            ::::::::        */
 /*   ft_itoa.c                                               :+:    :+:       */
 /*                                                          +:+               */
 /*   By: bede-kon <bede-kon@student.codam.nl>              +#+                */
 /*                                                        +#+                 */
-/*   Created: 2025/10/23 15:28:18 by bede-kon            #+#    #+#           */
-/*   Updated: 2025/10/23 16:06:46 by bede-kon            ########   odam.nl   */
+/*   Created: 2025/11/12 18:25:10 by bede-kon            #+#    #+#           */
+/*   Updated: 2025/11/12 18:25:49 by bede-kon            ########   odam.nl   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
 #include <stdlib.h>
 
 static
-size_t	n_len(long	n)
+size_t	n_len(long n)
 {
 	size_t	len;
 
@@ -40,14 +39,16 @@ void	make_str(long n, char *str, size_t len)
 		n = -n;
 		*str = '-';
 	}
-	str += len - 1;
+	str += len;
+	*str = '\0';
+	str--;
 	while (n > 9)
 	{
-		*str = (n % 10) + 48;
+		*str = (n % 10) + '0';
 		n /= 10;
 		str--;
 	}
-	*str = (n % 10) + 48;
+	*str = (n % 10) + '0';
 }
 
 char	*ft_itoa(int n)
@@ -61,11 +62,4 @@ char	*ft_itoa(int n)
 		return (NULL);
 	make_str(n, str, len);
 	return (str);
-}
-
-int	main()
-{
-	printf("%s\n", ft_itoa(-2147483648));
-	printf("%s\n", ft_itoa(0));
-	return (0);
 }

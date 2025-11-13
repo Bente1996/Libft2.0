@@ -17,11 +17,3 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 }
-
-//int	main()
-//{
-//	int	fd = 1;
-//	char	s[] = "stringeling";
-//	ft_putstr_fd(s, fd);
-//	return (0);
-//}

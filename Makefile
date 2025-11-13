@@ -1,4 +1,3 @@
-#CC := cc
 NAME := libft.a
 HEADERFILE := libft.h
 SRCFILES := ft_isalpha.c \
@@ -13,32 +12,79 @@ ft_memcpy.c \
 ft_memmove.c \
 ft_strlcpy.c \
 ft_strlcat.c \
+ft_toupper.c \
+ft_tolower.c \
+ft_strchr.c \
+ft_strrchr.c \
 ft_strncmp.c \
 ft_memchr.c \
 ft_memcmp.c \
 ft_strnstr.c \
 ft_atoi.c \
-ft_calloc.c
+ft_calloc.c \
+ft_strdup.c \
+ft_substr.c \
+ft_strjoin.c \
+ft_strtrim.c \
+ft_split.c \
+ft_itoa.c \
+ft_strmapi.c \
+ft_striteri.c \
+ft_putchar_fd.c \
+ft_putstr_fd.c \
+ft_putendl_fd.c \
+ft_putnbr_fd.c
+BONUS_SRCFILES := ft_lstnew.c \
+ft_lstadd_front.c \
+ft_lstsize.c \
+ft_lstlast.c \
+ft_lstadd_back.c \
+ft_lstdelone.c \
+ft_lstclear.c \
+ft_lstiter.c \
+ft_lstmap.c
 
 OBJFILES := $(SRCFILES:.c=.o)
-CFLAGS ?= -Wall -Wextra -Werror -c
+BONUS_OBJFILES := $(BONUS_SRCFILES:.c=.o)
+DEPDIR := dep/
+DEPFILES := $(addprefix $(DEPDIR),$(SRCFILES:.c=.d)$(BONUS_SRCFILES:.c=.d))
+CPPFLAGS ?=
+DEPFLAG = -MM -MF $@ -MT $@ -MT $(addsuffix .o,$(basename $<))
+CFLAGS ?= -Wall -Wextra -Werror
+.DEFAULT_GOAL := all
+MAKEFLAGS += -j
+
+-include $(DEPFILES)
 
 all : $(NAME)
 
+bonus : $(BONUS_OBJFILES)
+	$(AR) -rcs $(NAME) $(BONUS_OBJFILES)
+
 $(NAME) : $(OBJFILES)
-	$(AR) -rcs $(NAME) $(OBLFILES)
+	$(AR) -rcs $(NAME) $(OBJFILES)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $^
+	$(CC) $(CFLAGS) -c $<
+
+$(DEPDIR)%.d: %.c | $(DEPDIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAG) $<
 
 clean:
-	$(RM) $(OBJFILES)
+	$(RM) $(OBJFILES) $(BONUS_OBJFILES)
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) -r $(DEPDIR)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
+
+%/:
+	mkdir -p $@
 
 test:
 	echo "$(CC) $(RM) $(AR) $(ARFLAGS)"
 
 .PHONY: all clean fclean re
+.PRECIOUS: $(DEPDIR)

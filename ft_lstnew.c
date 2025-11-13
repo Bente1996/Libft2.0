@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void *content)
 {
@@ -25,11 +23,3 @@ t_list	*ft_lstnew(void *content)
 	new_node->next = NULL;
 	return (new_node);
 }
-
-//int	main()
-//{
-//	t_list	*node;
-//	node = ft_lstnew("this is the content");
-//	printf("%s\n", (char *)node->content);
-//	return (0);
-//}

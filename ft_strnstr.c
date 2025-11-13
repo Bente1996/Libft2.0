@@ -10,20 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
-#include <string.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	little_len;
 
-	if (!little || !little[0])
+	if (!little[0])
 		return ((char *)big);
 	little_len = ft_strlen(little);
-	if (len < little_len)
-		return (NULL);
-	while (len >= little_len && ft_strncmp(big, little, little_len))
+	while (*big && len >= little_len && ft_strncmp(big, little, little_len))
 	{
 		big++;
 		len--;
@@ -31,14 +27,4 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (len >= little_len && !ft_strncmp(big, little, little_len))
 		return ((char *)big);
 	return (NULL);
-}
-
-int	main()
-{
-	char	big[] = "AAAAAAABBBBAAAAAAA";
-	char	little[] = "BBBB";
-
-	printf("%s\n", ft_strnstr(big, little, 16));
-	printf("%s\n", ft_strnstr(big, little, 4));
-	return (0);
 }

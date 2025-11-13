@@ -10,18 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if(ft_isalpha(c) + ft_isdigit(c) > 0)
-		return(1);
-	return(0);
-}
-
-int	main()
-{
-	printf("%d\n", ft_isalnum(10));
-	return(0);
+	if (ft_isalpha(c) + ft_isdigit(c) > 0)
+		return (1);
+	return (0);
 }

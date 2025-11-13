@@ -10,108 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
 static
 t_list	*safe_lstnew(void *content, void (*del)(void *))
 {
-	t_list	*new;
+	t_list *const	new = ft_lstnew(content);
 
-	new = ft_lstnew(content);
 	if (!new)
-	{
 		del(content);
-		return (NULL);
-	}
 	return (new);
 }
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
-	t_list *new_node;
+	t_list	*new_node;
 
-	new_lst = ft_lstnew(f(lst->content)); // lst == NULL?
-										  // f succeed, lstnew fail?
+	if (!lst)
+		return (NULL);
+	new_lst = safe_lstnew(f(lst->content), del);
 	if (!new_lst)
 	{
 		ft_lstclear(&new_lst, del);
 		return (NULL);
 	}
-	lst = lst->next; // lst == NULL
+	lst = lst->next;
 	while (lst)
 	{
-		new_node = ft_lstnew(f(lst->content));
+		new_node = safe_lstnew(f(lst->content), del);
 		if (!new_node)
 		{
-			ft_lstclear(&new_node, del);
+			ft_lstclear(&new_lst, del);
 			return (NULL);
 		}
 		ft_lstadd_back(&new_lst, new_node);
 		lst = lst->next;
 	}
 	return (new_lst);
-}
-
-void	*f(char *node_content)
-{
-	char	*f_content;
-
-	f_content = node_content;
-	while (*node_content)
-		*node_content++ += 4;
-	return (f_content);
-}
-
-void	del_noop(void *content)
-{
-	(void)content;
-}
-
-void	del(char *node_content)
-{
-	while (*node_content)
-		*node_content++ = 0;
-}
-
-int	main()
-{
-	t_list	*one = malloc(sizeof(t_list));
-	if (!one)
-		return (0);
-	t_list	*two = malloc(sizeof(t_list));
-	if (!two)
-		return (0);
-	t_list	*three =  malloc(sizeof(t_list));
-	if (!three)
-		return (0);
-	t_list	*four = malloc(sizeof(t_list));
-	if (!four)
-		return (0);
-
-	char	s_one[] = "abcd";
-	one->content = s_one;
-	one->next = two;
-	char	s_two[] = "bcde";
-	two->content = s_two;
-	two->next = three;
-	char	s_three[] = "cdef";
-	three->content = s_three;
-	three->next = four;
-	char	s_four[] = "defg";
-	four->content = s_four;
-	four->next = NULL;
-	printf("%s\n", (char *)one->content);
-	printf("%s\n", (char *)two->content);
-	printf("%s\n", (char *)three->content);
-	printf("%s\n", (char *)four->content);
-	one = ft_lstmap(one, (void *(*)(void *))f, (void (*)(void *))del);
-	printf("new list:\n");
-	printf("%s\n", (char *)one->content);
-	printf("%s\n", (char *)two->content);
-	printf("%s\n", (char *)three->content);
-	printf("%s\n", (char *)four->content);
-	return (0);
 }

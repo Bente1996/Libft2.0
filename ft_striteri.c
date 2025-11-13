@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
-
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
@@ -23,21 +20,4 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		f(i, &s[i]);
 		i++;
 	}
-}
-
-void	f(unsigned int i, char *c)
-{
-	int garnaal;
-
-	*c += 1;
-	garnaal = i;
-}
-
-int	main()
-{
-	char	s[] = "abcdefg";
-	
-	ft_striteri(s, f);
-	printf("%s\n", s);
-	return (0);
 }

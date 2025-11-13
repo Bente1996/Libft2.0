@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "libft.h"
 #include <stdlib.h>
 
@@ -23,6 +21,8 @@ int	str_count(const char *s, char c)
 
 	count = 0;
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
 		while (s[i] == c && s[i] != '\0')
@@ -43,7 +43,7 @@ size_t	split_free(char **split)
 	int	j;
 
 	j = 0;
-	while (*split[j] != '\0')
+	while (split[j])
 	{
 		free(split[j]);
 		j++;
@@ -90,7 +90,7 @@ char	**ft_split(const char *s, char c)
 
 	j = 0;
 	strings = str_count(s, c);
-	split = malloc(sizeof(char *) * strings + 1);
+	split = malloc(sizeof(char *) * (strings + 1));
 	if (!split)
 		return (NULL);
 	while (strings > 0)
@@ -104,23 +104,4 @@ char	**ft_split(const char *s, char c)
 	}
 	split[j] = NULL;
 	return (split);
-}
-
-int	main(void)
-{
-	const char	s[] = "Hello, World! Hello, Universe! gom";
-	const char	c = ' ';
-	char		**store;
-	char		**split;
-
-	split = ft_split(s, c);
-	store = split;
-	while (*split)
-	{
-		printf("%s\n", *split);
-		free(*split);
-		split++;
-	}
-	free(store);
-	return (0);
 }

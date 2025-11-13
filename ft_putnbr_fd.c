@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include <unistd.h>
-#include <limits.h>
 
 static
 void	fill_buffer(char buf[11], size_t len, long n, int fd)
@@ -54,25 +52,4 @@ void	ft_putnbr_fd(int n, int fd)
 	len = n_len(n);
 	fill_buffer(buf, len, n, fd);
 	write(fd, buf + 1, len);
-}
-
-int	main()
-{
-	int fd = STDOUT_FILENO;
-	ft_putstr_fd("INT_MIN: ", fd);
-	ft_putnbr_fd(INT_MIN, fd);
-	ft_putchar_fd('\n', fd);
-	ft_putstr_fd("INT_MAX: ", fd);
-	ft_putnbr_fd(INT_MAX, fd);
-	ft_putchar_fd('\n', fd);
-	ft_putstr_fd("0: ", fd);
-	ft_putnbr_fd(0, fd);
-	ft_putchar_fd('\n', fd);
-	ft_putstr_fd("123: ", fd);
-	ft_putnbr_fd(123, fd);
-	ft_putchar_fd('\n', fd);
-	ft_putstr_fd("-123: ", fd);
-	ft_putnbr_fd(-123, fd);
-	ft_putchar_fd('\n', fd);
-	return (0);
 }

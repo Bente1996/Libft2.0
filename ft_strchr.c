@@ -10,19 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	return (ft_memchr(s, c, ft_strlen(s) + 1));
-}
-
-int	main()
-{
-	char	s[] = "zoek naar de eerste c in de string";
-	char	c = 'c'; 
-
-	printf("%s\n", ft_strchr(s, c));
-	return(0);
 }

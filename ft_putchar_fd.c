@@ -10,18 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-//int	main()
-//{
-//	int	fd = 3;
-//	char c = 'B';
-//	ft_putchar_fd(c, fd);
-//	return(0);
-//}

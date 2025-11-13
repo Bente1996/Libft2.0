@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
-#include <stdlib.h>
-
 int	ft_atoi(const char *nptr)
 {
 	int	sign;
@@ -22,7 +18,7 @@ int	ft_atoi(const char *nptr)
 	sign = 1;
 	converted = 0;
 	while (*nptr == ' ' || *nptr == '\f' || *nptr == '\n' || *nptr == '\r' || \
-	*nptr == '\r' || *nptr == '\t' || *nptr == '\v')
+*nptr == '\r' || *nptr == '\t' || *nptr == '\v')
 		nptr++;
 	if (*nptr == '-' || *nptr == '+')
 	{
@@ -33,13 +29,4 @@ int	ft_atoi(const char *nptr)
 	while (*nptr >= '0' && *nptr <= '9')
 		converted = (*nptr++ - 48) + (10 * converted);
 	return (converted * sign);
-}
-
-int	main()
-{
-	char	str[] = "  \f ---73473289";
-
-	printf("%d\n", ft_atoi(str));
-	printf("%d\n", atoi(str));
-	return(0);
 }

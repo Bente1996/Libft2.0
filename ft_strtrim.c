@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
@@ -28,13 +26,4 @@ char	*ft_strtrim(const char *s1, const char *set)
 	if (!begin)
 		return (NULL);
 	return (begin);
-}
-
-int	main()
-{
-	char	str[] = "stringbbbb bente is string";
-	char	set[] = "string";
-
-	printf("%s\n", ft_strtrim(str, set));
-	return (0);
 }

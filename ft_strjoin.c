@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include <stdlib.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	const	size_t	s1_len = ft_strlen(s1);
-	const	size_t	s2_len = ft_strlen(s2);
-	char	*joined;
+	const size_t	s1_len = ft_strlen(s1);
+	const size_t	s2_len = ft_strlen(s2);
+	char			*joined;
 
 	joined = malloc(s1_len + s2_len + 1);
 	if (!joined)
@@ -26,15 +25,4 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	ft_strlcpy(joined, s1, s1_len + 1);
 	ft_strlcpy(&joined[s1_len], s2, s2_len + 1);
 	return (joined);
-}
-
-int	main()
-{
-	char		s1[] = "AAA";
-	char		s2[] = "BBBBBB";
-	char *const	result = ft_strjoin(s1, s2); // ALLOC
-
-	printf("%s\n", result); // DOESNT FREE
-	free(result); // FREE
-	return (0);
 }

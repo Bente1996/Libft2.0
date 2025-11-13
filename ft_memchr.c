@@ -10,28 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
+#include <stddef.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const char	*str = (char *)s;
 
-	while(n)
+	while (n)
 	{
-		if(*str == c)
-			return((void *)str);
+		if (*str == (char)c)
+			return ((void *)str);
 		str++;
 		n--;
 	}
-	return(NULL);
+	return (NULL);
 }
-
-//int	main()
-//{
-//	char	s[] = "searching for a c in the sentence";
-//	char	c = 'c';
-//
-//	printf("%s\n", (char *)ft_memchr(s, c, 15));
-//	return(0);
-//}

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include <stdlib.h>
 #include <stdint.h>
@@ -20,7 +19,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*ptr;
 
 	ptr = NULL;
-	if(SIZE_MAX / size > nmemb)
+	if (!size)
+		return (malloc(0));
+	if (SIZE_MAX / size > nmemb)
 	{
 		ptr = malloc(nmemb * size);
 		if (!ptr)
@@ -28,13 +29,4 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		ft_bzero(ptr, nmemb * size);
 	}
 	return (ptr);
-}
-
-int	main()
-{
-	printf("%p\n", ft_calloc(3, 12345));
-	printf("%p\n", calloc(3, 12345));
-	printf("%p\n", ft_calloc(3, SIZE_MAX));
-	printf("%p\n", calloc(3, SIZE_MAX));
-	return (0);
 }

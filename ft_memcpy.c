@@ -10,25 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
+#include <stddef.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char	*cdest;
 	char	*csrc;
 
+	if (!dest && !src)
+		return (0);
 	cdest = (char *)dest;
 	csrc = (char *)src;
-	while(n)
+	while (n)
 	{
 		*cdest++ = *csrc++;
 		n--;
 	}
-	return(dest);
+	return (dest);
 }
-
-//int	main()
-//{
-//	return(0);
-//}
