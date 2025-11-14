@@ -52,7 +52,6 @@ CPPFLAGS ?=
 DEPFLAG = -MM -MF $@ -MT $@ -MT $(addsuffix .o,$(basename $<))
 CFLAGS ?= -Wall -Wextra -Werror
 .DEFAULT_GOAL := all
-MAKEFLAGS += -j
 
 -include $(DEPFILES)
 
